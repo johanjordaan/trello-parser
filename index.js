@@ -20,6 +20,7 @@ fs.readFile('./data.json','utf8',(err,data)=>{
           checklist: checklist.name,
           item: item.name,
           state: item.state,
+          moved: item.name.includes("#movedtopt"),
         });
       })
     }))
@@ -28,9 +29,9 @@ fs.readFile('./data.json','utf8',(err,data)=>{
   console.log(cards[30]);
 
   var csv = fs.createWriteStream('data.csv');
-  csv.write(`"State","List","Name","Checklist","Item"\n`);
+  csv.write(`"State","Moved","List","Name","Checklist","Item"\n`);
   _.each(rows,(row)=>{
-    csv.write(`"${row.state}","${row.list}","${row.name}","${row.checklist}","${row.item}"\n`);
+    csv.write(`"${row.state}","${row.moved}","${row.list}","${row.name}","${row.checklist}","${row.item}"\n`);
   })
   csv.end();
 })
